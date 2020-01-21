@@ -7,13 +7,16 @@ using namespace std;
 int main(){
 
     string in_plaintext;
+    string ciphertext;
     string key;
 
     getline(cin, in_plaintext);
     getline(cin, key);
 
-    encryptSuperAlphabetVignere(in_plaintext,key);
-    decryptSuperAlphabetVignere(in_plaintext,key);
+    encryptAsciiVignere(in_plaintext, ciphertext ,key);
+    cout << ciphertext << endl;
+    decryptAsciiVignere(ciphertext, in_plaintext, key);
+    cout << in_plaintext << endl;
 
 
     return 0;
