@@ -12,11 +12,9 @@ int main(){
     getline(cin, in_plaintext);
     getline(cin, key);
 
-    encryptAsciiVignere(in_plaintext,key);
-    decryptAsciiVignere(in_plaintext,key);
+    encryptSuperAlphabetVignere(in_plaintext,key);
+    decryptSuperAlphabetVignere(in_plaintext,key);
 
-    encryptAlphabetVignere(in_plaintext,key);
-    decryptAlphabetVignere(in_plaintext,key);
 
     return 0;
 }

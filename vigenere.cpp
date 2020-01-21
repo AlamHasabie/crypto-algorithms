@@ -5,9 +5,6 @@
 using namespace std;
 
 
-// Input byte character (ASCII)
-// produces no output, but change the inputs to uppercase
-// Throw exception in case of invalid character (beyond [a-zA-Z])
 
 void encryptAlphabetVignere(string& plaintext, string& key){
 
@@ -28,9 +25,7 @@ void encryptAlphabetVignere(string& plaintext, string& key){
 
 
 }
-// Input byte character (ASCII)
-// produces no output, but change the inputs to uppercase
-// Throw exception in case of invalid character (beyond [a-zA-Z])
+
 void decryptAlphabetVignere(string& ciphertext, string& key){
 
     int ascii_dec;
@@ -51,6 +46,51 @@ void decryptAlphabetVignere(string& ciphertext, string& key){
     cout << ciphertext << endl;
 
 }
+
+void encryptSuperAlphabetVignere(std::string& plaintext, std::string& key){
+
+    char hash = (char) 0x00;
+    char temp;
+
+    encryptAlphabetVignere(plaintext,key);
+
+    for (int i = 0; i < key.length() ; i++){
+        hash = hash^key[i];
+    }
+
+    for (int i = 0 ; i < plaintext.length() ; i++){
+        temp = plaintext[i];
+        plaintext[i] = plaintext[(i+ (int)hash)%plaintext.length()];
+        plaintext[(i+(int)hash)%plaintext.length()] = temp;
+    }
+
+    cout << plaintext << endl;
+
+}
+void decryptSuperAlphabetVignere(std::string& ciphertext, std::string& key){
+    
+    char hash = (char) 0x00;
+    char temp;
+
+
+    for (int i = 0; i < key.length() ; i++){
+        hash = hash^key[i];
+    }
+
+    for (int i=ciphertext.length()-1 ; i >= 0; i--){
+        temp = ciphertext[i];
+        ciphertext[i] = ciphertext[(i+(int)hash)%ciphertext.length()];
+        ciphertext[(i+(int)hash)%ciphertext.length()] = temp;
+    }
+
+    cout << ciphertext << endl;
+
+    decryptAlphabetVignere(ciphertext,key);
+
+
+}
+
+
 void encryptAsciiVignere(string& plaintext, string& key){
 
     for (int i=0 ; i < plaintext.length() ; i++){
