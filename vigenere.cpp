@@ -6,7 +6,10 @@ using namespace std;
 
 
 
-void encryptAlphabetVignere(string& plaintext, string& ciphertext, string& key){
+void removeSymbols(string& text);
+void capitalize(string &text);
+
+void encryptAlphabetVigenere(string& plaintext, string& ciphertext, string& key){
 
     int ascii_dec;
 
@@ -25,7 +28,7 @@ void encryptAlphabetVignere(string& plaintext, string& ciphertext, string& key){
     }
 
 }
-void decryptAlphabetVignere(string& ciphertext, string& plaintext, string& key){
+void decryptAlphabetVigenere(string& ciphertext, string& plaintext, string& key){
 
     int ascii_dec;
     plaintext.clear();
@@ -46,18 +49,28 @@ void decryptAlphabetVignere(string& ciphertext, string& plaintext, string& key){
 }
 
 
-void encryptAutoKeyAlphabetVignere(string& plaintext, string& ciphertext, string& key){
+void encryptAutoKeyAlphabetVigenere(string& plaintext, string& ciphertext, string& key){
+    
     int diff;
+
+
+    removeSymbols(plaintext);
+    removeSymbols(key);
+    capitalize(plaintext);
+    capitalize(key);
+
+    ciphertext.clear();
+
     if (key.length()  < plaintext.length()) {
         diff = plaintext.length() - key.length();
         for (int i = 0 ; i < diff ; i++){
             key.push_back(plaintext[i]);
         }
     }
-    encryptAlphabetVignere(plaintext,ciphertext,key);
+    encryptAlphabetVigenere(plaintext,ciphertext,key);
 }
 
-void decryptAutoKeyAlphabetVignere(string& ciphertext, string& plaintext, string& key){
+void decryptAutoKeyAlphabetVigenere(string& ciphertext, string& plaintext, string& key){
     
     // Assume that key length equals plaintext length
     // If not , then throw an exception
@@ -66,15 +79,15 @@ void decryptAutoKeyAlphabetVignere(string& ciphertext, string& plaintext, string
         throw "Key length does not match ciphertext length !";
     }
 
-    decryptAlphabetVignere(ciphertext,plaintext,key);
+    decryptAlphabetVigenere(ciphertext,plaintext,key);
 }
 
-void encryptSuperAlphabetVignere(string& plaintext, string& ciphertext, string& key){
+void encryptSuperAlphabetVigenere(string& plaintext, string& ciphertext, string& key){
 
     char hash = (char) 0x00;
     char temp;
 
-    encryptAlphabetVignere(plaintext,ciphertext, key);
+    encryptAlphabetVigenere(plaintext,ciphertext, key);
 
 
     for (int i = 0; i < key.length() ; i++){
@@ -89,7 +102,7 @@ void encryptSuperAlphabetVignere(string& plaintext, string& ciphertext, string& 
 
 
 }
-void decryptSuperAlphabetVignere(string& ciphertext, string& plaintext, string& key){
+void decryptSuperAlphabetVigenere(string& ciphertext, string& plaintext, string& key){
     
     char hash = (char) 0x00;
     char temp;
@@ -105,12 +118,12 @@ void decryptSuperAlphabetVignere(string& ciphertext, string& plaintext, string& 
     }
 
 
-    decryptAlphabetVignere(ciphertext, plaintext, key);
+    decryptAlphabetVigenere(ciphertext, plaintext, key);
 
 
 }
 
-void encryptAsciiVignere(string& plaintext, string& ciphertext, string& key){
+void encryptAsciiVigenere(string& plaintext, string& ciphertext, string& key){
 
     int ascii_dec;
     ciphertext.clear();
@@ -121,7 +134,7 @@ void encryptAsciiVignere(string& plaintext, string& ciphertext, string& key){
     }
 
 }
-void decryptAsciiVignere(string& ciphertext, string& plaintext, string& key){
+void decryptAsciiVigenere(string& ciphertext, string& plaintext, string& key){
 
     int mod_result;
     plaintext.clear();
@@ -131,4 +144,29 @@ void decryptAsciiVignere(string& ciphertext, string& plaintext, string& key){
         if (mod_result < 0) mod_result += 256;
         plaintext.push_back((char) mod_result);
     }
+}
+
+void encryptFullVigenere(string& plaintext, string& ciphertext, string& key){
+
+}
+void decryptFullVigenere(string& ciphertext, string& plaintext, string& key){
+
+}
+
+void removeSymbols(string& text){
+
+    string buffer(text);
+    int ascii;
+    text.clear();
+    for (int i = 0; i < buffer.length(); i++){
+        ascii = (int) buffer[i];
+        if((65<=ascii&&90>=ascii)||(97<=ascii&&122>=ascii)){
+            text.push_back((char) ascii);
+        }
+    }
+}
+
+
+void capitalize(string& text){
+    transform(text.begin(), text.end(), text.begin(), ::toupper);
 }

@@ -13,9 +13,11 @@ int main(){
     getline(cin, in_plaintext);
     getline(cin, key);
 
-    encryptAsciiVignere(in_plaintext, ciphertext ,key);
+    encryptAutoKeyAlphabetVigenere(in_plaintext, ciphertext ,key);
     cout << ciphertext << endl;
-    decryptAsciiVignere(ciphertext, in_plaintext, key);
+    cout << ciphertext.length() << endl;
+    cout << key.length() << endl;
+    decryptAutoKeyAlphabetVigenere(ciphertext, in_plaintext, key);
     cout << in_plaintext << endl;
 
 
