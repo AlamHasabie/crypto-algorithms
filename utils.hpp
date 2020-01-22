@@ -12,5 +12,6 @@ class for helper function
 
 void toAlphabet(std::string& text);
 void toUpper(std::string& text);
+bool isAlphabet(char c);
 
 #endif

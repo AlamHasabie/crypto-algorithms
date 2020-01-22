@@ -18,3 +18,7 @@ void toAlphabet(std::string& text){
 void toUpper(std::string& text){
     transform(text.begin(), text.end(), text.begin(), ::toupper);
 }
+
+bool isAlphabet(char c){
+    return ((int) c <= 90) && ((int) c >= 65);
+}

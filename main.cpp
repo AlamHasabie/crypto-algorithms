@@ -13,9 +13,9 @@ int main(){
     getline(cin, in_plaintext);
     getline(cin, key);
 
-    encryptFullVigenere(in_plaintext, ciphertext ,key);
+    encryptFullVigenere(in_plaintext,ciphertext,key);
     cout << ciphertext << endl;
-    decryptFullVigenere(ciphertext, in_plaintext, key);
+    decryptFullVigenere(ciphertext,in_plaintext,key);
     cout << in_plaintext << endl;
 
 

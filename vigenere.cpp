@@ -38,7 +38,6 @@ const string tabula[26] = {
 void encryptAlphabetVigenere(string& plaintext, string& ciphertext, string& key){
 
     int ascii_dec;
-    int key_idx;
 
     ciphertext.clear();
 
@@ -48,12 +47,11 @@ void encryptAlphabetVigenere(string& plaintext, string& ciphertext, string& key)
     toUpper(key);
     toUpper(plaintext);
 
-    key_idx = 0;
     for (int i=0; i < plaintext.length() ; i++) {
         // Ignore encoding non-alphabet characters
         ascii_dec = plaintext[i];
         if (65<=ascii_dec && 90>=ascii_dec){
-            ascii_dec = (char) (((int) plaintext[i] + (int) key[key_idx])%26 + 65);
+            ascii_dec = (char) (((int) plaintext[i] + (int) key[i%key.length()])%26 + 65);
         }
         ciphertext.push_back((char)ascii_dec);
     }
@@ -184,34 +182,62 @@ void decryptAsciiVigenere(string& ciphertext, string& plaintext, string& key){
 
 void encryptFullVigenere(string& plaintext, string& ciphertext, string& key){
 
-    int idx_row, idx_col;
+    int idx_row, idx_col,key_idx;
+
     toUpper(plaintext);
     toUpper(key);
-    toAlphabet(plaintext);
+
+    // Assume alphabet only key
     toAlphabet(key);
 
     ciphertext.clear();
-    // Using the tabula
+    
+
+    key_idx = 0;
 
     for (int i=0; i < plaintext.length(); i++){
-        idx_col = (int) plaintext[i] - 65;
-        idx_row = (int) key[i%key.length()] - 65;
-        ciphertext.push_back(tabula[idx_row][idx_col]);
+        if(((int) plaintext[i]>=65)&&((int) plaintext[i]<=90)){
+
+            idx_col = (int) plaintext[i] - 65;
+            idx_row = (int) key[key_idx%key.length()] - 65;
+            ciphertext.push_back(tabula[idx_row][idx_col]);
+            key_idx++;
+
+        } else {
+
+            ciphertext.push_back((char) plaintext[i]);
+        }
+
     }
 
 }
 void decryptFullVigenere(string& ciphertext, string& plaintext, string& key){
     
-    //Assume valid input
-    int idx_row ;
+    int idx_row, key_idx ;
+
+    
+    // Validate
+    toUpper(ciphertext);
+    toUpper(key);
+    toAlphabet(key);
+
     plaintext.clear();
+    key_idx=0;
+
     for(int i=0; i < ciphertext.length(); i++){
-        idx_row = (int) key[i%key.length()] - 65;
-        for (int col=0; col < 26; col++){
-            if(tabula[idx_row][col]==ciphertext[i]){
-                plaintext.push_back((char) col+65);
-                break;
-            }
+        if(isAlphabet(ciphertext[i])){
+            idx_row = (int) key[key_idx%key.length()] - 65;
+            // Search for corresponding alphabet
+            for (int col=0; col < 26; col++){
+                if(tabula[idx_row][col]==ciphertext[i]){
+                    plaintext.push_back((char) col+65);
+                    break;
+                }
+            }     
+            key_idx++;
+        } else {
+            plaintext.push_back((char) ciphertext[i]);
         }
+        
     }
 }
