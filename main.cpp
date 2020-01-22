@@ -16,6 +16,7 @@ int main(){
     encryptAlphabetVigenere(in_plaintext,ciphertext,key);
     displayPlainCiphertext(ciphertext);
     displayNoSpaceCiphertext(ciphertext);
+    displayBlockCiphertext(ciphertext);
     
     decryptAlphabetVigenere(ciphertext,in_plaintext,key);
     cout << in_plaintext << endl;
