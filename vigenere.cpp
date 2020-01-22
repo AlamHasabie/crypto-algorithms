@@ -50,7 +50,7 @@ void encryptAlphabetVigenere(string& plaintext, string& ciphertext, string& key)
     for (int i=0; i < plaintext.length() ; i++) {
         // Ignore encoding non-alphabet characters
         ascii_dec = plaintext[i];
-        if (65<=ascii_dec && 90>=ascii_dec){
+        if (isAlphabet(ascii_dec)){
             ascii_dec = (char) (((int) plaintext[i] + (int) key[i%key.length()])%26 + 65);
         }
         ciphertext.push_back((char)ascii_dec);
@@ -71,7 +71,7 @@ void decryptAlphabetVigenere(string& ciphertext, string& plaintext, string& key)
     for (int i=0; i < ciphertext.length() ; i++) {
         // Ignore non-alphabet characters
         ascii_dec = ciphertext[i];
-        if (65<=ascii_dec && 90>=ascii_dec){
+        if (isAlphabet(ascii_dec)){
             ascii_dec = ((int) ciphertext[i] - (int) key[i%key.length()])%26;
             if (ascii_dec<0) ascii_dec += 26;
             ascii_dec +=65;
@@ -196,7 +196,7 @@ void encryptFullVigenere(string& plaintext, string& ciphertext, string& key){
     key_idx = 0;
 
     for (int i=0; i < plaintext.length(); i++){
-        if(((int) plaintext[i]>=65)&&((int) plaintext[i]<=90)){
+        if(isAlphabet(plaintext[i])){
 
             idx_col = (int) plaintext[i] - 65;
             idx_row = (int) key[key_idx%key.length()] - 65;
