@@ -6,6 +6,35 @@ using namespace std;
 
 
 
+const string tabula[26] = {
+    "QWERTYUIOPASDFGHJKLZXCVBNM",
+    "MNBVCXZASDFGHJKLPOIUYTREWQ",
+    "QAZXSWEDCVFRTGBNHYUJMKILOP",
+    "MLPOKNBJIUHVCGYTFXZDRQWESA",
+    "QACRFVTGBZWNUJMISXEDYHKOLP",
+    "ZXCVBNMLKJHGFDSAQWERTYUIOP",
+    "ASDFGHJKLPOIUYTREWQZXCVBNM",
+    "LKJHGFDSAPOIUYTREWQMNBVCXZ",
+    "PLMNKOIJBVHUYGCXFTRDZSEWQA",
+    "LOPIKMNJUYHBTGVRFCEDXZASQW",
+    "WSXEDCRBYHNUJMQAZIKOLPFVTG",
+    "LKJHGWQMCXFDSAPOIUNBVYTREZ",
+    "JKLFGHYTREWQZXCVBIUASNMPOD",
+    "QCVBNTYUWERZXISDFGHOPAJKLM",
+    "SAPOMNLKFDJHGBTREWQIUYVCXZ",
+    "CAPOIUNBVLQMYTREZXFDSKJHGW",
+    "BVCXZASDFMTREWNGHJKLPOIUYQ",
+    "DFGASHJKLRUYTCVEWQZXPOIBNM",
+    "EHGBTRLKFDWQIPOMUYVCSANJXZ",
+    "NBJIUHMTFXZDRGYEQWLPOKVCSA",
+    "FDSABVYTREKJPOILXUNHGWQMCZ",
+    "GHTREWQZSNXCVBIUAMPODJKLFY",
+    "HSKJGBAPOIUVLQMYTRCNZXFDEW",
+    "ISXEDQWKOLNUJMYHACRFVTGBZP",
+    "QUICKBROWNFXJMPVERTHLAZYDG",
+    "RBMFVTGYQAZIKOLPHNUJWSXEDC"
+};
+
 void removeSymbols(string& text);
 void capitalize(string &text);
 
@@ -148,9 +177,36 @@ void decryptAsciiVigenere(string& ciphertext, string& plaintext, string& key){
 
 void encryptFullVigenere(string& plaintext, string& ciphertext, string& key){
 
+    int idx_row, idx_col;
+    capitalize(plaintext);
+    capitalize(key);
+    removeSymbols(plaintext);
+    removeSymbols(key);
+
+    ciphertext.clear();
+    // Using the tabula
+
+    for (int i=0; i < plaintext.length(); i++){
+        idx_col = (int) plaintext[i] - 65;
+        idx_row = (int) key[i%key.length()] - 65;
+        ciphertext.push_back(tabula[idx_row][idx_col]);
+    }
+
 }
 void decryptFullVigenere(string& ciphertext, string& plaintext, string& key){
-
+    
+    //Assume valid input
+    int idx_row ;
+    plaintext.clear();
+    for(int i=0; i < ciphertext.length(); i++){
+        idx_row = (int) key[i%key.length()] - 65;
+        for (int col=0; col < 26; col++){
+            if(tabula[idx_row][col]==ciphertext[i]){
+                plaintext.push_back((char) col+65);
+                break;
+            }
+        }
+    }
 }
 
 void removeSymbols(string& text){

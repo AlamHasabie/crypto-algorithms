@@ -11,6 +11,7 @@ Author : alamhasabie
 #ifndef VIGENERE_H
 #define VIGENERE_H
 
+
 // Standard Vigenere
 void encryptAlphabetVigenere(std::string& plaintext, std::string& ciphertext, std::string& key);
 void decryptAlphabetVigenere(std::string& ciphertext, std::string& plaintext, std::string& key);
