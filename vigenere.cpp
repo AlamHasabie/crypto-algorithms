@@ -1,4 +1,5 @@
 #include "vigenere.hpp"
+#include "utils.hpp"
 #include <algorithm>
 #include <iostream>
 
@@ -35,8 +36,6 @@ const string tabula[26] = {
     "RBMFVTGYQAZIKOLPHNUJWSXEDC"
 };
 
-void removeSymbols(string& text);
-void capitalize(string &text);
 
 void encryptAlphabetVigenere(string& plaintext, string& ciphertext, string& key){
 
@@ -83,10 +82,10 @@ void encryptAutoKeyAlphabetVigenere(string& plaintext, string& ciphertext, strin
     int diff;
 
 
-    removeSymbols(plaintext);
-    removeSymbols(key);
-    capitalize(plaintext);
-    capitalize(key);
+    toAlphabet(plaintext);
+    toAlphabet(key);
+    toUpper(plaintext);
+    toUpper(key);
 
     ciphertext.clear();
 
@@ -178,10 +177,10 @@ void decryptAsciiVigenere(string& ciphertext, string& plaintext, string& key){
 void encryptFullVigenere(string& plaintext, string& ciphertext, string& key){
 
     int idx_row, idx_col;
-    capitalize(plaintext);
-    capitalize(key);
-    removeSymbols(plaintext);
-    removeSymbols(key);
+    toUpper(plaintext);
+    toUpper(key);
+    toAlphabet(plaintext);
+    toAlphabet(key);
 
     ciphertext.clear();
     // Using the tabula
@@ -207,22 +206,4 @@ void decryptFullVigenere(string& ciphertext, string& plaintext, string& key){
             }
         }
     }
-}
-
-void removeSymbols(string& text){
-
-    string buffer(text);
-    int ascii;
-    text.clear();
-    for (int i = 0; i < buffer.length(); i++){
-        ascii = (int) buffer[i];
-        if((65<=ascii&&90>=ascii)||(97<=ascii&&122>=ascii)){
-            text.push_back((char) ascii);
-        }
-    }
-}
-
-
-void capitalize(string& text){
-    transform(text.begin(), text.end(), text.begin(), ::toupper);
 }
