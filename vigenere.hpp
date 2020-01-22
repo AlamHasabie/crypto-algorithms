@@ -28,9 +28,9 @@ Superposition algorithm :
 void encryptSuperAlphabetVignere(std::string& plaintext, std::string& ciphertext, std::string& key);
 void decryptSuperAlphabetVignere(std::string& ciphertext, std::string& plaintext, std::string& key);
 
-// Full-key Vigenere
-void encryptFullKeyAlphabetVignere(std::string& plaintext, std::string& ciphertext, std::string& key);
-void decryptFullKeyAlphabetVignere(std::string& ciphertext, std::string& plaintext, std::string& key);
+// auto-key Vigenere
+void encryptAutoKeyAlphabetVignere(std::string& plaintext, std::string& ciphertext, std::string& key);
+void decryptAutoKeyAlphabetVignere(std::string& ciphertext, std::string& plaintext, std::string& key);
 
 
 // ASCII Vignere

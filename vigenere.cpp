@@ -46,7 +46,7 @@ void decryptAlphabetVignere(string& ciphertext, string& plaintext, string& key){
 }
 
 
-void encryptFullKeyAlphabetVignere(string& plaintext, string& ciphertext, string& key){
+void encryptAutoKeyAlphabetVignere(string& plaintext, string& ciphertext, string& key){
     int diff;
     if (key.length()  < plaintext.length()) {
         diff = plaintext.length() - key.length();
@@ -57,7 +57,7 @@ void encryptFullKeyAlphabetVignere(string& plaintext, string& ciphertext, string
     encryptAlphabetVignere(plaintext,ciphertext,key);
 }
 
-void decryptFullKeyAlphabetVignere(string& ciphertext, string& plaintext, string& key){
+void decryptAutoKeyAlphabetVignere(string& ciphertext, string& plaintext, string& key){
     
     // Assume that key length equals plaintext length
     // If not , then throw an exception
