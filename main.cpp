@@ -1,5 +1,5 @@
 #include "vigenere.hpp"
-#include <iostream>
+#include "display.hpp"
 
 using namespace std;
 
@@ -14,7 +14,9 @@ int main(){
     getline(cin, key);
 
     encryptAlphabetVigenere(in_plaintext,ciphertext,key);
-    cout << ciphertext << endl;
+    displayPlainCiphertext(ciphertext);
+    displayNoSpaceCiphertext(ciphertext);
+    
     decryptAlphabetVigenere(ciphertext,in_plaintext,key);
     cout << in_plaintext << endl;
 
