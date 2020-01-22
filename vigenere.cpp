@@ -25,7 +25,6 @@ void encryptAlphabetVignere(string& plaintext, string& ciphertext, string& key){
     }
 
 }
-
 void decryptAlphabetVignere(string& ciphertext, string& plaintext, string& key){
 
     int ascii_dec;
@@ -44,6 +43,30 @@ void decryptAlphabetVignere(string& ciphertext, string& plaintext, string& key){
         }
     }
 
+}
+
+
+void encryptFullKeyAlphabetVignere(string& plaintext, string& ciphertext, string& key){
+    int diff;
+    if (key.length()  < plaintext.length()) {
+        diff = plaintext.length() - key.length();
+        for (int i = 0 ; i < diff ; i++){
+            key.push_back(plaintext[i]);
+        }
+    }
+    encryptAlphabetVignere(plaintext,ciphertext,key);
+}
+
+void decryptFullKeyAlphabetVignere(string& ciphertext, string& plaintext, string& key){
+    
+    // Assume that key length equals plaintext length
+    // If not , then throw an exception
+
+    if (key.length()!=ciphertext.length()){
+        throw "Key length does not match ciphertext length !";
+    }
+
+    decryptAlphabetVignere(ciphertext,plaintext,key);
 }
 
 void encryptSuperAlphabetVignere(string& plaintext, string& ciphertext, string& key){
@@ -86,7 +109,6 @@ void decryptSuperAlphabetVignere(string& ciphertext, string& plaintext, string& 
 
 
 }
-
 
 void encryptAsciiVignere(string& plaintext, string& ciphertext, string& key){
 

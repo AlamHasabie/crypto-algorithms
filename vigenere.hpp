@@ -28,6 +28,11 @@ Superposition algorithm :
 void encryptSuperAlphabetVignere(std::string& plaintext, std::string& ciphertext, std::string& key);
 void decryptSuperAlphabetVignere(std::string& ciphertext, std::string& plaintext, std::string& key);
 
+// Full-key Vigenere
+void encryptFullKeyAlphabetVignere(std::string& plaintext, std::string& ciphertext, std::string& key);
+void decryptFullKeyAlphabetVignere(std::string& ciphertext, std::string& plaintext, std::string& key);
+
+
 // ASCII Vignere
 void encryptAsciiVignere(std::string& plaintext, std::string& ciphertext ,std::string& key);
 void decryptAsciiVignere(std::string& ciphertext, std::string& plaintext ,std::string& key);
