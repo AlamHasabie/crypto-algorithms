@@ -38,29 +38,37 @@ const string tabula[26] = {
 void encryptAlphabetVigenere(string& plaintext, string& ciphertext, string& key){
 
     int ascii_dec;
+    int key_idx;
 
     ciphertext.clear();
 
-    transform(key.begin(), key.end(), key.begin(), ::toupper);
-    transform(plaintext.begin(), plaintext.end(), plaintext.begin(), ::toupper);
+    //Assume key would contains alphabet ONLY
+    toAlphabet(key);
 
+    toUpper(key);
+    toUpper(plaintext);
+
+    key_idx = 0;
     for (int i=0; i < plaintext.length() ; i++) {
         // Ignore encoding non-alphabet characters
         ascii_dec = plaintext[i];
         if (65<=ascii_dec && 90>=ascii_dec){
-            ascii_dec = (char) (((int) plaintext[i] + (int) key[i%key.length()])%26 + 65);
-            ciphertext.push_back(ascii_dec);
+            ascii_dec = (char) (((int) plaintext[i] + (int) key[key_idx])%26 + 65);
         }
+        ciphertext.push_back((char)ascii_dec);
     }
 
 }
+
+// Precondtion : Uppercase alphabet key ONLY
 void decryptAlphabetVigenere(string& ciphertext, string& plaintext, string& key){
 
     int ascii_dec;
     plaintext.clear();
 
-    transform(key.begin(), key.end(), key.begin(), ::toupper);
-    transform(ciphertext.begin(), ciphertext.end(), ciphertext.begin(), ::toupper);
+
+    toUpper(key);
+    toUpper(ciphertext);
 
     for (int i=0; i < ciphertext.length() ; i++) {
         // Ignore non-alphabet characters
@@ -68,8 +76,10 @@ void decryptAlphabetVigenere(string& ciphertext, string& plaintext, string& key)
         if (65<=ascii_dec && 90>=ascii_dec){
             ascii_dec = ((int) ciphertext[i] - (int) key[i%key.length()])%26;
             if (ascii_dec<0) ascii_dec += 26;
-            plaintext.push_back((char) ascii_dec+65);
+            ascii_dec +=65;
         }
+
+        plaintext.push_back((char) ascii_dec);
     }
 
 }
