@@ -1,5 +1,6 @@
 #include "vigenere.hpp"
 #include "display.hpp"
+#include "playfair.hpp"
 
 using namespace std;
 
@@ -13,13 +14,10 @@ int main(){
     getline(cin, in_plaintext);
     getline(cin, key);
 
-    encryptAlphabetVigenere(in_plaintext,ciphertext,key);
-    displayPlainCiphertext(ciphertext);
-    displayNoSpaceCiphertext(ciphertext);
-    displayBlockCiphertext(ciphertext);
+    encryptPlayfairCipher(in_plaintext, ciphertext, key);
+
+
     
-    decryptAlphabetVigenere(ciphertext,in_plaintext,key);
-    cout << in_plaintext << endl;
 
 
     return 0;
