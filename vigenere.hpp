@@ -4,14 +4,10 @@ Header for Vigenere encrypt/decypt and its variations
 Author : alamhasabie
 
 **/
-
-#include <string>
-
-
 #ifndef VIGENERE_H
 #define VIGENERE_H
 
-
+#include "utils.hpp"
 // Standard Vigenere
 void encryptAlphabetVigenere(std::string& plaintext, std::string& ciphertext, std::string& key);
 void decryptAlphabetVigenere(std::string& ciphertext, std::string& plaintext, std::string& key);

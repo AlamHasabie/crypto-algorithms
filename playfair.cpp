@@ -1,1 +1,5 @@
-// Playfair algorithm
+/*
+Playfair cipher
+*/
+
+#include "utils.hpp"

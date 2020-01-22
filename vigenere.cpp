@@ -1,6 +1,4 @@
 #include "vigenere.hpp"
-#include "utils.hpp"
-#include <algorithm>
 #include <iostream>
 
 using namespace std;
