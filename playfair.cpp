@@ -15,6 +15,7 @@ void encryptPlayfairCipher(string& plaintext, string& ciphertext, string&key){
 
     char table[25];
     string plaintext_alphabet = string(plaintext);
+    string::iterator it1,it2;
     string bufferstring;
 
     int idx1,idx2;
@@ -61,7 +62,9 @@ void encryptPlayfairCipher(string& plaintext, string& ciphertext, string&key){
         }
     }
 
-    cout << plaintext_alphabet << endl;
+    // put together ciphertext
+    ciphertext += plaintext_alphabet;
+
 
 }
 void decrpytPlayfairCipher(string& plaintext, string& ciphertext, string&key){

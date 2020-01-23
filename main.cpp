@@ -15,6 +15,9 @@ int main(){
     getline(cin, key);
 
     encryptPlayfairCipher(in_plaintext, ciphertext, key);
+    displayPlainCiphertext(ciphertext);
+    displayNoSpaceCiphertext(ciphertext);
+    displayBlockCiphertext(ciphertext);
 
 
     
