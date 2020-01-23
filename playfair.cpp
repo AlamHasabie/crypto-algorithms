@@ -67,10 +67,39 @@ void encryptPlayfairCipher(string& plaintext, string& ciphertext, string&key){
 
 
 }
-void decrpytPlayfairCipher(string& plaintext, string& ciphertext, string&key){
+
+// Assume no symbolic characters, 
+// Assume capitalized letter,
+// i.e. valid Playfair string
+void decryptPlayfairCipher(string& ciphertext, string& plaintext, string& key){
+    
+    int idx1,idx2;
+    toAlphabet(ciphertext);
+    plaintext.clear();
+
+    char table[25];
+
+    for (int i = 0 ; i < 25 ; i++) {
+        table[i] = key[i];
+    }
 
 
+    for (string::iterator i = ciphertext.begin(); i < ciphertext.end(); i+=2){
+        idx1 = alphabetIndex(table, *i);
+        idx2 = alphabetIndex(table, *(i+1));
+        
+        if ((idx1/5)==(idx2/5)){
+            plaintext.push_back(table[(idx1+4)%5]);
+            plaintext.push_back(table[(idx2+4)%5]);
+        } else if ((idx1%5)==(idx2%5)){
+            plaintext.push_back(table[(idx1+20)%25]);
+            plaintext.push_back(table[(idx2+20)%25]);
+        } else {
+            plaintext.push_back(table[5*(idx1/5) + (idx2%5)]);
+            plaintext.push_back(table[5*(idx2/5) + (idx1%5)]);
+        }
 
+    }
 }
 
 

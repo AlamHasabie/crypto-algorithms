@@ -11,6 +11,6 @@
 */ 
 
 void encryptPlayfairCipher(std::string& plaintext, std::string& ciphertext, std::string&key);
-void decrpytPlayfairCipher(std::string& plaintext, std::string& ciphertext, std::string&key);
+void decryptPlayfairCipher(std::string& ciphertext, std::string& plaintext, std::string&key);
 
 #endif

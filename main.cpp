@@ -18,6 +18,10 @@ int main(){
     displayPlainCiphertext(ciphertext);
     displayNoSpaceCiphertext(ciphertext);
     displayBlockCiphertext(ciphertext);
+    decryptPlayfairCipher(ciphertext,in_plaintext,key);
+    displayPlainCiphertext(in_plaintext);
+    displayNoSpaceCiphertext(in_plaintext);
+    displayBlockCiphertext(in_plaintext);
 
 
     
