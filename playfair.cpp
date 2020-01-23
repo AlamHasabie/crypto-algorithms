@@ -10,11 +10,14 @@ using namespace std;
 
 
 void convertToPlayfairString(string &text);
+int alphabetIndex(char* table, char c);
 void encryptPlayfairCipher(string& plaintext, string& ciphertext, string&key){
 
-    string table[5] = {"","","","",""};
+    char table[25];
     string plaintext_alphabet = string(plaintext);
     string bufferstring;
+
+    int idx1,idx2;
 
     // Assume table are all alphabets and capital
 
@@ -24,8 +27,8 @@ void encryptPlayfairCipher(string& plaintext, string& ciphertext, string&key){
     ciphertext.clear();
     bufferstring.clear();
 
-    for (int i=0; i < key.length() ; i++) {
-        table[i/5].push_back(key[i]);
+    for (int i = 0 ; i < 25 ; i++) {
+        table[i] = key[i];
     }
 
     // Works on the alphabet version of the cipher
@@ -38,11 +41,27 @@ void encryptPlayfairCipher(string& plaintext, string& ciphertext, string&key){
 
     convertToPlayfairString(plaintext_alphabet);
     cout << plaintext_alphabet << endl;
-
-
     
+    for (string::iterator i = plaintext_alphabet.begin() ; i< plaintext_alphabet.end(); i+=2){
+        idx1 = alphabetIndex(table,*i);
+        idx2 = alphabetIndex(table,*(i+1));
 
+        // Check for Playfair cipher conditions
+        // Assume that all cases are exclusive (and it should be)
 
+        if ((idx1/5)==(idx2/5)){
+            *i = table[(idx1+1)%5];
+            *(i+1) = table[(idx2+1)%5];
+        } else if ((idx1%5)==(idx2%5)){
+            *i = table[(idx1+5)%25];
+            *(i+1) = table[(idx2+5)%25];
+        } else {
+            *i = table[5*(idx1/5) + (idx2%5)];
+            *(i+1) = table[5*(idx2/5) + (idx1%5)];
+        }
+    }
+
+    cout << plaintext_alphabet << endl;
 
 }
 void decrpytPlayfairCipher(string& plaintext, string& ciphertext, string&key){
@@ -77,5 +96,15 @@ void convertToPlayfairString(string &text){
 
     if (text.size()%2==1) text.push_back('X');
 
+}
+
+
+int alphabetIndex(char* table, char c){
+    int idx = 0;
+    while(idx<25){
+        if(table[idx]==c) break;
+        idx++;
+    }
+    return idx;
 }
 
