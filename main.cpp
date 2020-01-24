@@ -2,6 +2,9 @@
 #include "display.hpp"
 #include "playfair.hpp"
 
+#include <fstream>
+#include <streambuf>
+
 using namespace std;
 
 
@@ -9,10 +12,17 @@ int main(){
 
 
     string choice;
+    string filename;
+
     string in_plaintext;
     string ciphertext;
     string key;
     bool is_quitting;
+
+    // File I/O
+    ifstream* file;
+    string* file_buffer;
+    
 
 
 
@@ -34,6 +44,12 @@ int main(){
                 cout << endl;
                 if(choice=="Y"){
                     cout << "Please type in the filename : ";
+                    getline(cin,filename);
+                    file = new ifstream(filename.c_str());
+                    file_buffer = new string((istreambuf_iterator<char>(*file)),
+                        istreambuf_iterator<char>());
+
+                    cout << *file_buffer << endl;
                     cout << endl;
                 } else if (choice=="N"){
                     cout << "Please type in the plaintext : ";
