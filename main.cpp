@@ -21,6 +21,7 @@ int main(){
 
     // File I/O
     ifstream* file;
+    ofstream* file_o;
     string* file_buffer;
     
 
@@ -48,8 +49,7 @@ int main(){
                     file = new ifstream(filename.c_str());
                     file_buffer = new string((istreambuf_iterator<char>(*file)),
                         istreambuf_iterator<char>());
-
-                    cout << *file_buffer << endl;
+                    in_plaintext = *file_buffer;
                     cout << endl;
                 } else if (choice=="N"){
                     cout << "Please type in the plaintext : ";
@@ -115,7 +115,12 @@ int main(){
                 getline(cin,choice);
                 if(choice=="Y"){
 
-                    
+                    cout << "Type the filename : ";
+                    getline(cin,filename);
+                    file_o = new ofstream(filename.c_str());
+                    *file_o << ciphertext;
+                    file_o->close();
+
                     break;
                 } else if (choice=="N"){
                     break;
@@ -146,6 +151,11 @@ int main(){
                 cout << endl;
                 if(choice=="Y"){
                     cout << "Please type in the filename : ";
+                    getline(cin,filename);
+                    file = new ifstream(filename.c_str());
+                    file_buffer = new string((istreambuf_iterator<char>(*file)),
+                        istreambuf_iterator<char>());
+                    ciphertext = *file_buffer;
                     cout << endl;
                 } else if (choice=="N"){
                     cout << "Please type in the ciphertext : ";
@@ -210,6 +220,12 @@ int main(){
                 cout << "Do you want the plaintext to be saved to external file ? (Y/N) ";
                 getline(cin,choice);
                 if(choice=="Y"){
+
+                    cout << "Type the filename : ";
+                    getline(cin,filename);
+                    file_o = new ofstream(filename.c_str());
+                    *file_o << in_plaintext;
+                    file_o->close();
 
                     
                     break;
