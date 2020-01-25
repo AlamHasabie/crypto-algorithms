@@ -68,6 +68,8 @@ void decryptAlphabetVigenere(string& ciphertext, string& plaintext, string& key)
     toUpper(key);
     toUpper(ciphertext);
 
+    toAlphabet(key);
+
     for (int i=0; i < ciphertext.length() ; i++) {
         // Ignore non-alphabet characters
         ascii_dec = ciphertext[i];
@@ -86,17 +88,15 @@ void decryptAlphabetVigenere(string& ciphertext, string& plaintext, string& key)
 void encryptAutoKeyAlphabetVigenere(string& plaintext, string& ciphertext, string& key){
     
     int diff;
+    string buffer(plaintext);
 
-
-    toAlphabet(plaintext);
+    toAlphabet(buffer);
     toAlphabet(key);
-    toUpper(plaintext);
-    toUpper(key);
 
     ciphertext.clear();
 
-    if (key.length()  < plaintext.length()) {
-        diff = plaintext.length() - key.length();
+    if (key.length()  < buffer.length()) {
+        diff = buffer.length() - key.length();
         for (int i = 0 ; i < diff ; i++){
             key.push_back(plaintext[i]);
         }

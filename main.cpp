@@ -70,6 +70,7 @@ int main(){
                 cout << "4. Full Key Vigenere Cipher (type '4')" << endl;
                 cout << "5. Playfair Cipher (type '5')" << endl;
                 cout << "6. Superkey Vigenere Cipher (type '6')" << endl;
+                cout << "7. Running Key Vigenere Cipher (type '7')" << endl;
                 getline(cin,choice);
                 if (choice=="1"){
                     encryptAlphabetVigenere(in_plaintext,ciphertext,key);
@@ -89,6 +90,15 @@ int main(){
                 } else if (choice=="6"){
                     encryptSuperAlphabetVigenere(in_plaintext,ciphertext,key);
                     break;
+                } else if (choice=="7"){
+                    cout << "Running key Vigenere requires external alphabetical key. Please input filename : ";
+                    getline(cin,filename);
+                    file = new ifstream(filename.c_str());
+                    file_buffer = new string((istreambuf_iterator<char>(*file)),
+                        istreambuf_iterator<char>());
+                    key = *file_buffer;
+                    encryptAlphabetVigenere(in_plaintext,ciphertext,key);
+                    break;                
                 } else {
                     cout << "Command not available. Let me try again.";
                 }
@@ -176,6 +186,7 @@ int main(){
                 cout << "4. Full Key Vigenere Cipher (type '4')" << endl;
                 cout << "5. Playfair Cipher (type '5')" << endl;
                 cout << "6. Superkey Vigenere Cipher (type '6')" << endl;
+                cout << "7. Running key Vigenere Cipher (type '7')" << endl;
                 getline(cin,choice);
                 if (choice=="1"){
                     decryptAlphabetVigenere(ciphertext,in_plaintext,key);
@@ -195,6 +206,15 @@ int main(){
                 } else if (choice=="6"){
                     decryptSuperAlphabetVigenere(ciphertext,in_plaintext,key);
                     break;
+                } else if (choice=="7"){
+                    cout << "Running key Vigenere requires external alphabetical key. Please input filename : ";
+                    getline(cin,filename);
+                    file = new ifstream(filename.c_str());
+                    file_buffer = new string((istreambuf_iterator<char>(*file)),
+                        istreambuf_iterator<char>());
+                    key = *file_buffer;
+                    decryptAlphabetVigenere(in_plaintext,ciphertext,key);
+                    break;                
                 } else {
                     cout << "Command not available. Let me try again.";
                 }

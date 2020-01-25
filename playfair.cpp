@@ -75,6 +75,9 @@ void decryptPlayfairCipher(string& ciphertext, string& plaintext, string& key){
     
     int idx1,idx2;
     toAlphabet(ciphertext);
+    toUpper(ciphertext);
+    toAlphabet(key);
+    toUpper(key);
     plaintext.clear();
 
     char table[25];
